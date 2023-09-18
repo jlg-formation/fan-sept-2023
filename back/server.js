@@ -18,5 +18,3 @@ app.use(serveIndex(publicDir, { icons: true }));
 app.listen(port, () => {
   console.log(`Example app listening on port ${port}`);
 });
-
-console.log("coucou");
