@@ -1,0 +1,45 @@
+button,
+a.button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5em 1em;
+  border: 0.1em solid #eee;
+  border-radius: 0.3em;
+  font-size: 1em;
+  text-decoration: inherit;
+  color: inherit;
+  background: #eee;
+
+  &:disabled {
+    color: #aaa;
+  }
+
+  &:not(:disabled) {
+    cursor: pointer;
+
+    &:hover {
+      background: #ddd;
+      border-color: #ddd;
+    }
+    &:active {
+      background: #ccc;
+      border-color: #ccc;
+    }
+
+    &.primary {
+      background: #333;
+      border-color: #333;
+      color: #eee;
+
+      &:hover {
+        background: #444;
+        border-color: #444;
+      }
+      &:active {
+        background: #555;
+        border-color: #555;
+      }
+    }
+  }
+}
