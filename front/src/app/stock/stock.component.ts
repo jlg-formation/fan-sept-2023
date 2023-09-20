@@ -7,7 +7,7 @@ import {
 } from '@fortawesome/free-solid-svg-icons';
 import { ArticleService } from '../services/article.service';
 import { Article } from '../interfaces/article';
-import { delay, of, switchMap, tap } from 'rxjs';
+import { delay, finalize, of, switchMap, tap } from 'rxjs';
 
 @Component({
   selector: 'app-stock',
@@ -21,6 +21,8 @@ export class StockComponent {
   faCircleNotch = faCircleNotch;
 
   selectedArticles = new Set<Article>();
+
+  isRefreshing = false;
 
   constructor(public articleService: ArticleService) {}
 
@@ -53,8 +55,14 @@ export class StockComponent {
 
     of(undefined)
       .pipe(
+        tap(() => {
+          this.isRefreshing = true;
+        }),
         delay(1000),
-        switchMap(() => this.articleService.getArticles())
+        switchMap(() => this.articleService.getArticles()),
+        finalize(() => {
+          this.isRefreshing = false;
+        })
       )
       .subscribe();
   }
