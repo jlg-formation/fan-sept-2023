@@ -1,11 +1,9 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject } from 'rxjs';
+import { BehaviorSubject, Observable, delay, map, of, switchMap } from 'rxjs';
 import { Article } from '../interfaces/article';
+import { HttpClient } from '@angular/common/http';
 
-const articles: Article[] = [
-  { id: 'a1', name: 'xTournevis', price: 2.99, qty: 150 },
-  { id: 'a2', name: 'xPelle', price: 4, qty: 25 },
-];
+const url = 'http://localhost:3000/api/articles';
 
 @Injectable({
   providedIn: 'root',
@@ -13,7 +11,19 @@ const articles: Article[] = [
 export class ArticleService {
   articles$ = new BehaviorSubject<Article[] | undefined>(undefined);
 
-  constructor() {
-    this.articles$.next(articles);
+  constructor(public http: HttpClient) {
+    if (this.articles$.value === undefined) {
+      this.getArticles().subscribe();
+    }
+  }
+
+  getArticles(): Observable<void> {
+    return of(undefined).pipe(
+      delay(3000),
+      switchMap(() => this.http.get<Article[]>(url)),
+      map((articles) => {
+        this.articles$.next(articles);
+      })
+    );
   }
 }
