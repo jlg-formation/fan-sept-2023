@@ -4,6 +4,7 @@ import {
   faPlus,
   faTrashCan,
 } from '@fortawesome/free-solid-svg-icons';
+import { ArticleService } from '../services/article.service';
 
 @Component({
   selector: 'app-stock',
@@ -14,4 +15,6 @@ export class StockComponent {
   faRotateRight = faRotateRight;
   faPlus = faPlus;
   faTrashCan = faTrashCan;
+
+  constructor(public articleService: ArticleService) {}
 }
