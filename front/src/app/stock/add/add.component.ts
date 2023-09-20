@@ -11,10 +11,7 @@ export class AddComponent {
   faPlus = faPlus;
 
   f = new FormGroup({
-    name: new FormControl('Truc', [
-      Validators.required,
-      Validators.maxLength(10),
-    ]),
+    name: new FormControl('', [Validators.required, Validators.maxLength(10)]),
     price: new FormControl(0, [Validators.required]),
     qty: new FormControl(0, [Validators.required]),
   });
