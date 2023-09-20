@@ -6,6 +6,7 @@ import {
   faCircleNotch,
 } from '@fortawesome/free-solid-svg-icons';
 import { ArticleService } from '../services/article.service';
+import { Article } from '../interfaces/article';
 
 @Component({
   selector: 'app-stock',
@@ -18,5 +19,15 @@ export class StockComponent {
   faTrashCan = faTrashCan;
   faCircleNotch = faCircleNotch;
 
+  selectedArticles = new Set<Article>();
+
   constructor(public articleService: ArticleService) {}
+
+  select(a: Article) {
+    if (this.selectedArticles.has(a)) {
+      this.selectedArticles.delete(a);
+      return;
+    }
+    this.selectedArticles.add(a);
+  }
 }
