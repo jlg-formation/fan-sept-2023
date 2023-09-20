@@ -23,6 +23,7 @@ export class StockComponent {
   selectedArticles = new Set<Article>();
 
   isRefreshing = false;
+  isRemoving = false;
 
   constructor(public articleService: ArticleService) {}
 
@@ -40,11 +41,17 @@ export class StockComponent {
 
     of(undefined)
       .pipe(
+        tap(() => {
+          this.isRemoving = true;
+        }),
         delay(1000),
         switchMap(() => this.articleService.removeArticles(ids)),
         switchMap(() => this.articleService.getArticles()),
         tap(() => {
           this.selectedArticles.clear();
+        }),
+        finalize(() => {
+          this.isRemoving = false;
         })
       )
       .subscribe();
