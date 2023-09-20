@@ -21,6 +21,14 @@
         </tr>
       </thead>
       <tbody>
+        <tr>
+          <td colspan="3">
+            <div class="loading">
+              <fa-icon [icon]="faCircleNotch" [spin]="true"></fa-icon>
+              <span>Chargement...</span>
+            </div>
+          </td>
+        </tr>
         <tr *ngFor="let a of articleService.articles$ | async">
           <td class="name">{{ a.name }}</td>
           <td class="price">{{ a.price }} €</td>

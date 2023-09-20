@@ -3,6 +3,7 @@ import {
   faRotateRight,
   faPlus,
   faTrashCan,
+  faCircleNotch,
 } from '@fortawesome/free-solid-svg-icons';
 import { ArticleService } from '../services/article.service';
 
@@ -15,6 +16,7 @@ export class StockComponent {
   faRotateRight = faRotateRight;
   faPlus = faPlus;
   faTrashCan = faTrashCan;
+  faCircleNotch = faCircleNotch;
 
   constructor(public articleService: ArticleService) {}
 }

@@ -19,7 +19,7 @@ export class ArticleService {
 
   getArticles(): Observable<void> {
     return of(undefined).pipe(
-      delay(3000),
+      delay(1000),
       switchMap(() => this.http.get<Article[]>(url)),
       map((articles) => {
         this.articles$.next(articles);
