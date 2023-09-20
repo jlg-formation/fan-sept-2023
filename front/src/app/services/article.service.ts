@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable, delay, map, of, switchMap } from 'rxjs';
-import { Article } from '../interfaces/article';
+import { Article, NewArticle } from '../interfaces/article';
 import { HttpClient } from '@angular/common/http';
 
 const url = 'http://localhost:3000/api/articles';
@@ -25,5 +25,9 @@ export class ArticleService {
         this.articles$.next(articles);
       })
     );
+  }
+
+  addArticle(newArticle: NewArticle): Observable<void> {
+    return this.http.post<void>(url, newArticle);
   }
 }
