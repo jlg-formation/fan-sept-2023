@@ -30,4 +30,8 @@ export class ArticleService {
   addArticle(newArticle: NewArticle): Observable<void> {
     return this.http.post<void>(url, newArticle);
   }
+
+  removeArticles(ids: string[]): Observable<void> {
+    return this.http.delete<void>(url, { body: ids });
+  }
 }
