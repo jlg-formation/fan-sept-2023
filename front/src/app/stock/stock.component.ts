@@ -50,5 +50,12 @@ export class StockComponent {
 
   refresh() {
     console.log('refresh');
+
+    of(undefined)
+      .pipe(
+        delay(1000),
+        switchMap(() => this.articleService.getArticles())
+      )
+      .subscribe();
   }
 }
